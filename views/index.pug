@@ -5,11 +5,18 @@ block content
   p Please fill out the form below to register for our service
 
   form(action="." method="POST")
-    label(for="name") Name:
+    label(for="first_name") First Name:
     input(
       type="text"
-      id="name"
-      name="name"
+      id="first_name"
+      name="first_name"
+    )
+
+    label(for="last_name") Last Name:
+    input(
+      type="text"
+      id="last_name"
+      name="last_name"
     )
 
     label(for="email") Email:
@@ -18,5 +25,11 @@ block content
       id="email"
       name="email"
     )
-
+    
+    label(for="github_handle") Github Handle:
+    input(
+      type="text"
+      id="github_handle"
+      name="github_handle"
+    )
     input(type="submit" value="Submit")
