@@ -9,6 +9,47 @@ AWS.config.update({region: config.aws_region});
 // Create an SQS service object
 var sqs = new AWS.SQS({apiVersion: '2012-11-05'});
 
+var sqs_queue_url = ""
+
+function init() {
+  console.log("Checking for SQS Queue")
+  var getQueueParams = {
+    QueueName: config.sqs_queue_name
+  };
+
+  sqs.getQueueUrl(getQueueParams, function(err, data) {
+    if (err) {
+      console.log("Error", err);
+
+      console.log("Createing SQS Queue")
+      var queueParams = {
+        QueueName: config.sqs_queue_name,
+        Attributes: {
+          'DelaySeconds': '60',
+          'MessageRetentionPeriod': '86400'
+        }
+      };
+
+      sqs.createQueue(queueParams, function(err, data) {
+        if (err) {
+          console.log("Error", err);
+          throw err;
+        } else {
+          console.log("Queue created: ", data.QueueUrl);
+          sqs_queue_url = data.QueueUrl
+        }
+      });
+
+    } else {
+      console.log("Found exisitng queue: ", data.QueueUrl);
+      sqs_queue_url = data.QueueUrl
+    }
+
+    
+  });
+
+
+}
 
 function putUserReg(details) {
 
@@ -36,13 +77,14 @@ function putUserReg(details) {
        MessageBody: "foo",
        // MessageDeduplicationId: "TheWhistler",  // Required for FIFO queues
        // MessageGroupId: "Group1",  // Required for FIFO queues
-       QueueUrl: "https://sqs.us-west-2.amazonaws.com/270357933177/policy_evaluation"
+       QueueUrl: sqs_queue_url
      };
 
 
     sqs.sendMessage(params, function(err, data) {
         if (err) {
           console.log("Error", err);
+          throw err
         } else {
           console.log("Success", data.MessageId);
         }
@@ -54,7 +96,7 @@ function putUserReg(details) {
 //putUserReg({email: "foo", github_handle: "foo", first_name: "bar", last_name: "baz"})
 
 
-module.exports ={putUserReg}
+module.exports = {putUserReg, init}
 
 
 

@@ -1,4 +1,5 @@
-var aws_region = "us-west-2";
-var sqs_url = "https://sqs.us-west-2.amazonaws.com/270357933177/policy_evaluation";
+var aws_region = process.env.aws_region;
+var sqs_queue_name = process.env.sqs_queue_name;
 
-module.exports = { aws_region,sqs_url };
+
+module.exports = { aws_region, sqs_queue_name };
