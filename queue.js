@@ -12,7 +12,7 @@ var sqs = new AWS.SQS({apiVersion: '2012-11-05'});
 var sqs_queue_url = ""
 
 function init() {
-  console.log("Checking for SQS Queue")
+  console.log("Initializing SQS plubming. Checking for SQS Queue")
   var getQueueParams = {
     QueueName: config.sqs_queue_name
   };
@@ -20,7 +20,6 @@ function init() {
   sqs.getQueueUrl(getQueueParams, function(err, data) {
     if (err) {
       console.log("Error", err);
-
       console.log("Createing SQS Queue")
       var queueParams = {
         QueueName: config.sqs_queue_name,
