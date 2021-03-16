@@ -2,7 +2,7 @@ extends layout
 
 block content
   h1= title
-  p Please fill out the form below to register for our service
+  p Create your account to get started with Rancher!: 
 
   form(action="." method="POST")
     label(for="first_name") First Name:
@@ -11,6 +11,7 @@ block content
       id="first_name"
       name="first_name"
     )
+    br
 
     label(for="last_name") Last Name:
     input(
@@ -18,6 +19,7 @@ block content
       id="last_name"
       name="last_name"
     )
+    br
 
     label(for="email") Email:
     input(
@@ -25,11 +27,6 @@ block content
       id="email"
       name="email"
     )
+    br
     
-    label(for="github_handle") Github Handle:
-    input(
-      type="text"
-      id="github_handle"
-      name="github_handle"
-    )
     input(type="submit" value="Submit")

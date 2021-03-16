@@ -5,7 +5,7 @@ const queue = require('../queue.js')
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Registration form' });
+  res.render('index', { title: 'Sign up for Raancher Cloud' });
 });
 
 module.exports = router;
@@ -17,7 +17,6 @@ router.post('/', (req, res) => {
   // Write user information to queue for processing by the backend
   queue.putUserReg({
     email: req.body.email, 
-    github_handle: req.body.github_handle, 
     first_name: req.body.first_name, 
     last_name: req.body.last_name})
 

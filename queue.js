@@ -67,10 +67,6 @@ function putUserReg(details) {
          "email": {
            DataType: "String",
            StringValue: details.email
-         },
-         "github_handle": {
-             DataType: "String",
-             StringValue: details.github_handle
          }
        },
        MessageBody: "foo",
