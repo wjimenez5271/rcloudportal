@@ -5,7 +5,7 @@ const queue = require('../queue.js')
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Sign up for Raancher Cloud' });
+  res.render('index', { title: 'Sign up for Rancher Cloud' });
 });
 
 module.exports = router;
